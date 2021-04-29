@@ -22,6 +22,9 @@ fun BigInteger.modMul(other: BigInteger, mod: BigInteger) = multiply(other).mod(
  */
 fun BigInteger.modAdd(other: BigInteger, mod: BigInteger) = add(other).mod(mod)!!
 
+/**
+ * Square root of [this], rounded down.
+ */
 fun BigInteger.sqrtFloor(): BigInteger {
     var half = ZERO.setBit(bitLength() / 2)
     var cur = half

@@ -4,7 +4,7 @@ import java.math.BigInteger.ZERO
 
 
 /**
- * Pohlig - Hellman algorithm for computing discrete logarithm x,
+ * Pohlig-Hellman algorithm for computing discrete logarithm x,
  * assuming aˣ ≡ b (mod p) and ordₚ(a) = qⁿ.
  * @param p: group order;
  * @param base: logarithm base (a);
