@@ -1,4 +1,4 @@
-# Implementation of the Pohlig–Hellman algorithm for computing discrete logarithms with a simple example.
+# Implementation of the Pohlig–Hellman algorithm for computing discrete logarithms with a simple example
 
 ## Run executable (requires Java 8)
 
