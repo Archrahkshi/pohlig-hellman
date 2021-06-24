@@ -1,6 +1,5 @@
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.math.BigInteger.ONE
 import kotlin.system.measureNanoTime
 
 fun main() {
@@ -26,9 +25,9 @@ fun main() {
     )
     assert(result2.log == BigInteger("72"))
 
-    val timeComplexityRatio =
-        (result1.time / result2.time).toBigDecimal() / (result2.complexity / result1.complexity).toBigDecimal()
-    if (BigDecimal("0.95") < timeComplexityRatio && timeComplexityRatio < BigDecimal("1.05"))
+    val timeRatio = result1.time.toBigDecimal() / result2.time.toBigDecimal()
+    val complexityRatio = result2.complexity.toBigDecimal() / result1.complexity.toBigDecimal()
+    if (timeRatio / complexityRatio == BigDecimal.ONE)
         println("\nTime is aligned with complexity - works as intended")
     else
         println("\nTime is not aligned with complexity")
@@ -48,7 +47,7 @@ fun run(p: String, a: String, b: String, q: String, n: Int): Result {
     val n1 = n.also { println("Subgroup order exponent (n): $it") }
 
     assert(n1 > 1)
-    assert(a1.modPow(q1.modPow(n1.toBigInteger(), p1), p1) == ONE) // ordₚ(a) = qⁿ
+    assert(a1.modPow(q1.modPow(n1.toBigInteger(), p1), p1) == BigInteger.ONE) // ordₚ(a) = qⁿ
 
     val log: BigInteger
     val time = measureNanoTime {
@@ -64,5 +63,5 @@ fun run(p: String, a: String, b: String, q: String, n: Int): Result {
 
 fun calculateComplexity(q: BigInteger, n1: Int): BigInteger {
     val n = n1.toBigInteger()
-    return n.pow(2) * q.bitLength().toBigInteger() + n * q.sqrt() // n²log₂q + n√q
+    return n.pow(2) * q.bitLength().toBigInteger() + n * q.sqrtFloor() // n²log₂q + n√q
 }
