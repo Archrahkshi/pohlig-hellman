@@ -53,7 +53,7 @@ fun discreteLog(p: BigInteger, base: BigInteger, arg: BigInteger, q: BigInteger,
  * @param alpha: logarithm base (α);
  * @param beta: logarithm argument (β).
  * @return discrete logarithm x.
- * Complexity: O(√q).
+ * Complexity: O(√n).
  */
 fun babyStepGiantStep(n: BigInteger, alpha: BigInteger, beta: BigInteger): BigInteger {
     val sqrt = n.sqrtFloor()
@@ -66,6 +66,7 @@ fun babyStepGiantStep(n: BigInteger, alpha: BigInteger, beta: BigInteger): BigIn
     for (i in ZERO..sqrt) {
         val j = table.find(gamma)
         if (j != ZERO)
+        // The Chinese remainder theorem guarantees there exists a unique solution
             return i.modMul(m, n).modAdd(j, n) // im + j
         else
             gamma = gamma.modMul(alphaMinusM, n) // γα⁻ᵐ
